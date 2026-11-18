@@ -13,6 +13,16 @@ performance remain unverified.
 - Live application: pending public deployment
 - Stack: JavaScript, Meta Immersive Web SDK 1.1.0, WebXR and Vite
 
+## Gallery
+
+![Afterimage key art showing the diamond, cube and pyramid being reconstructed by hand](submission-assets/afterimage-thumbnail.png)
+
+*Afterimage's three shape identities and hands-first reconstruction.*
+
+![IWER simulator capture showing target outlines, error lines and the round score](docs/images/afterimage-reveal-iwer.png)
+
+*Accuracy reveal with identity-matched targets and placement-error lines. This is a Meta IWER simulator capture using emulated hand input, not physical Quest footage.*
+
 ## 1. Project status
 
 The current release candidate includes a one-star tutorial, three authored rounds,
@@ -477,3 +487,9 @@ A small, complete application that:
 - Is submitted and accessible before the deadline.
 
 A smaller finished game is preferable to a larger unfinished prototype.
+
+## License
+
+Afterimage's original source code is available under the [MIT License](LICENSE).
+Third-party dependencies and assets retain their own licenses; see
+[THIRD_PARTY.md](THIRD_PARTY.md) and the notices shipped with the production build.

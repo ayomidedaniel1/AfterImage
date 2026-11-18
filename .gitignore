@@ -1,2 +1,28 @@
 node_modules/
 dist/
+
+# Generated release packages and recordings
+release/
+
+# Local tooling and deployment state
+.impeccable/
+.vercel/
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+
+# Test, coverage and temporary output
+coverage/
+playwright-report/
+test-results/
+tmp/
+temp/
+*.log
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
