@@ -84,4 +84,4 @@ Phase interaction policy is explicit in main.js: draggable gameplay meshes are v
 
 ## Changed files
 
-main.js contains input recovery; smoke.mjs covers interruptions, duplicate activation and fixed expected scores. SUBMISSION.md, THIRD_PARTY.md and STATUS.md contain the handoff. public/WebXR-input-assets-LICENSE.txt ships with the generated package notices. release/rc-85a9e24/ preserves the deployable ZIP, media and SHA-256 manifest. submission-assets/afterimage-thumbnail.png is a separate competition thumbnail and does not modify the RC.
+main.js contains input recovery; smoke.mjs covers interruptions, duplicate activation and fixed expected scores. README.md now reflects the implemented state and documents local use plus the Vercel configuration; no deployment was performed. SUBMISSION.md, THIRD_PARTY.md and STATUS.md contain the handoff. public/WebXR-input-assets-LICENSE.txt ships with the generated package notices. release/rc-85a9e24/ preserves the deployable ZIP, media and SHA-256 manifest. submission-assets/afterimage-thumbnail.png is a separate competition thumbnail and does not modify the RC.

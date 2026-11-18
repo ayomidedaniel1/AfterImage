@@ -4,24 +4,61 @@
 
 Afterimage is a small, seated, hands-first VR spatial-memory game for Meta Quest.
 
-This repository is being developed under an extremely short competition deadline.
-The priority is a complete, reliable, honestly presented experience—not feature count.
+The player studies three shapes suspended at different depths, rebuilds the pattern
+from memory, and receives an identity-matched accuracy score. The complete loop has
+been tested with emulated hands in Meta IWER. Physical Quest operation, comfort and
+performance remain unverified.
+
+- Source: https://github.com/ayomidedaniel1/AfterImage
+- Live application: pending public deployment
+- Stack: JavaScript, Meta Immersive Web SDK 1.1.0, WebXR and Vite
 
 ## 1. Project status
 
-IMPORTANT: This document is a specification, not evidence that anything is implemented.
+The current release candidate includes a one-star tutorial, three authored rounds,
+five-second observation, hand reconstruction, target outlines, error lines, scoring
+and replay. Logic tests, a production build and a full IWER simulator smoke test pass.
+See [STATUS.md](STATUS.md) for exact evidence, hashes and unresolved testing gaps.
 
-At initial handoff:
+### Run locally
 
-- The game concept and scope have been selected.
-- Development stack has NOT been confirmed.
-- Repository contents have NOT been inspected.
-- Quest hardware access has NOT been confirmed.
-- SDK installation and hand tracking have NOT been verified.
-- No working implementation is established by this README.
-- The original time budget was approximately three hours; remaining time is unknown.
+Requirements: Node.js 20.19 or newer and npm.
 
-The coding agent must inspect the environment before choosing implementation details.
+```powershell
+npm ci --ignore-scripts
+npm run dev
+```
+
+Open the local URL printed by Vite. A desktop browser shows the scene and compatibility
+message but cannot prove immersive hand tracking.
+
+To reproduce the tested production build:
+
+```powershell
+node --test game.test.js
+npm run build
+npm run preview
+```
+
+The deployable static site is generated in `dist/`. The IWER smoke test can be run
+with `node smoke.mjs`; it requires Microsoft Edge and Git for Windows OpenSSL, or an
+`OPENSSL_BIN` environment variable pointing to OpenSSL.
+
+### Deploy to Vercel
+
+This repository is a standard Vite static site and requires no runtime secrets:
+
+1. Import `ayomidedaniel1/AfterImage` into Vercel.
+2. Keep the detected framework as **Vite**.
+3. Use `npm run build` as the build command and `dist` as the output directory.
+4. Deploy and confirm the resulting HTTPS URL is public without Vercel Authentication
+   or Deployment Protection.
+5. Open the URL signed out, verify both license files resolve, and test it in Quest
+   Browser with hand tracking if hardware is available.
+
+For the competition submission, keep the verified URL freely available through the
+winner announcement. Freeze the submitted deployment and disable automatic production
+changes after the deadline.
 
 ## 2. Competition context
 
