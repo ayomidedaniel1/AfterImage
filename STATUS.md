@@ -3,7 +3,7 @@
 ## Last updated
 
 - November 18, 2026, 19:42 WAT (Africa/Lagos). About 1h18m until the official close at 21:00 WAT / noon PST. Keep 20:15–21:00 WAT for delivery and submission. [Official rules](https://start-developer-competition-26.devpost.com/rules)
-- RC gameplay source matches master at 85a9e24f1109a307ed3df139336739dbc349eab0. The previous status predates Git initialization. Release notices, expanded test assertions and submission records are working-tree additions. No new commit or push was made by this release pass.
+- RC gameplay source is based on 85a9e24f1109a307ed3df139336739dbc349eab0. Release notices, expanded test assertions, the preserved RC and submission assets were committed and pushed to origin/master in d3f0e955a4f0fbf58cbd35914090decec33c19bc. This status-only follow-up does not change the verified RC.
 - Main bundle assets/index-BEvlVPsm.js, SHA-256 ea50fa109bc9868fe13656faa9a4b25055d7392c1db4a342bb7598d76eb48a25.
 - Preserved upload artifact: release/rc-85a9e24/afterimage-site.zip, 7,447,283 bytes, SHA-256 8b113b3a3ad241b49a99b663e5a63766456acfd17efca1aef252b4296b2a3545. All 37 zipped files compared byte-for-byte with dist/. Media hashes are in release/rc-85a9e24/SHA256SUMS.txt.
 
