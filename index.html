@@ -1,0 +1,22 @@
+﻿<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Afterimage</title>
+<style>
+  * { box-sizing: border-box }
+  body { margin: 0; background: #101925; color: #f5eddd; font: 1rem/1.5 system-ui,sans-serif }
+  main { position: fixed; inset: 0 }
+  header, footer { position: fixed; left: 6vw; right: 6vw; pointer-events: none }
+  header { top: 4vh } footer { bottom: 5vh }
+  h1 { font: normal clamp(2.8rem,7vw,6rem)/1 Georgia,serif; margin: .2em 0 }
+  p { margin: .4em 0 }
+  button { pointer-events: auto; background: #f3c984; border: 0; padding: .8em 1.5em; font: inherit; border-radius: .4em }
+  button:disabled { display: none }
+</style>
+<main id="scene" aria-label="Spatial memory game"></main>
+<header><h1>Afterimage</h1><p>Study a constellation. Rebuild it with your hands.</p></header>
+<footer><p id="status" role="status">Loading the scene…</p><button id="enter" disabled>Enter VR</button></footer>
+<script type="module" src="./main.js"></script>
+</html>
+
