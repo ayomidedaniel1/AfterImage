@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { chromium, expect } from '@playwright/test'
 import { preview } from 'vite'
-import { ids, tray, rounds, roundScore, sessionScore } from './game.js'
+import { ids, tray, rounds } from './game.js'
 
 // Serve the actual production artifact. The emulator is injected only into this test browser.
 const temp = await mkdtemp(join(tmpdir(), 'afterimage-tls-'))
@@ -96,6 +96,13 @@ try {
         await placeGrip(x, y - 0.16, z - 0.42)
         await page.evaluate(() => device.hands.right.updatePinchValue(1))
         await expect(status).toContainText('Open your fingers')
+        if (id === 'cube') {
+          await placeGrip(0, -0.315, -0.355, 'left')
+          await page.evaluate(() => device.hands.left.updatePinchValue(1))
+          await page.waitForTimeout(500)
+          await expect(status).toContainText('Open your fingers')
+          await page.evaluate(() => device.hands.left.updatePinchValue(0))
+        }
         const [tx, ty, tz] = rounds[0][id]
         await placeGrip(tx, ty - 0.16, tz - 0.42)
         await page.evaluate(() => device.hands.right.updatePinchValue(0))
@@ -104,12 +111,11 @@ try {
     }
     await pinchButton()
     await expect(status).toContainText('Round ' + round + ' accuracy')
-    const expected = round === 1 ? 100 : roundScore(tray, rounds[round - 1])
+    const expected = [100, 0, 7][round - 1]
     await expect(status).toContainText(expected + '%')
     await pinchButton()
   }
-  await expect(status).toHaveText('Final accuracy · ' +
-    sessionScore([100, roundScore(tray, rounds[1]), roundScore(tray, rounds[2])]) + '%')
+  await expect(status).toHaveText('Final accuracy · 36%')
   await pinchButton()
   await expect(status).toHaveText('Pinch the star. Move it into the outline.')
   await placeGrip(-0.085, -0.20, -0.40, 'left')

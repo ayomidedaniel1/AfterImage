@@ -2,69 +2,86 @@
 
 ## Last updated
 
-- November 18, 2026, 17:34 WAT (Africa/Lagos). No Git repository or revision. Production entry bundle is index-iEoO_a-p.js.
-- Official close is November 18 at noon PST, 21:00 WAT. About 3h26m remained at this update. Reserve 20:15–21:00 WAT for capture, hosting and submission.
-- [Entrant-supplied official rules](https://start-developer-competition-26.devpost.com/rules)
+- November 18, 2026, 19:42 WAT (Africa/Lagos). About 1h18m until the official close at 21:00 WAT / noon PST. Keep 20:15–21:00 WAT for delivery and submission. [Official rules](https://start-developer-competition-26.devpost.com/rules)
+- RC gameplay source matches master at 85a9e24f1109a307ed3df139336739dbc349eab0. The previous status predates Git initialization. Release notices, expanded test assertions and submission records are working-tree additions. No new commit or push was made by this release pass.
+- Main bundle assets/index-BEvlVPsm.js, SHA-256 ea50fa109bc9868fe13656faa9a4b25055d7392c1db4a342bb7598d76eb48a25.
+- Preserved upload artifact: release/rc-85a9e24/afterimage-site.zip, 7,447,283 bytes, SHA-256 8b113b3a3ad241b49a99b663e5a63766456acfd17efca1aef252b4296b2a3545. All 37 zipped files compared byte-for-byte with dist/. Media hashes are in release/rc-85a9e24/SHA256SUMS.txt.
 
 ## Environment
 
-- Fresh project confirmed by entrant. Only README.md and AGENTS.md existed. No prior STATUS.md, application, dependency manifest or build commands.
-- Windows, Node 24.18.0, npm 11.6.4, Git 2.47.0. Android platform-tools installed; adb devices -l listed zero devices. No Unity editor found in standard locations.
-- Meta IWSDK Core 1.1.0, Vite 7.3.8, IWER 2.8.0, Playwright Test 1.65.1. Versions locked in package-lock.json.
-- Target is Quest Browser. Entrant has no Quest. Local static HTTPS delivery tested in desktop Edge.
+Windows, Node 24.18.0, npm 11.6.4, IWSDK Core 1.1.0, Vite 7.3.8. Tested in headless Microsoft Edge using Playwright Test 1.65.1 and IWER 2.8.0 (Quest 3 profile). Target is Quest Browser over HTTPS. Entrant has no physical Quest.
 
 ## What works
 
-The immersive session anchors a unit-scale board once relative to the initial viewer pose. Matching the tutorial diamond starts three authored rounds. Each round shows a five-second constellation, hides it, and presents a diamond, cube and pyramid in the tray. Released shapes stay suspended. Check freezes the placements and reveals the corresponding outlines, error lines and round accuracy. Next advances to the following round or final average. Play again resets scores, timer, objects and tutorial.
+One-star tutorial, three authored constellations, five-second observation, hand rebuilding, identity-matched target outlines and error lines, three round scores, final average and replay. SDK one-hand grabs operate the three shapes and fixed controls. The board stays at its initial pose. Authored interaction centers are 0.406–0.485 m from the initial viewer position; physical reach awaits headset testing.
 
-Star positions and targets use the same board-local meters. Each identity scores linearly from 100% at zero error to 0% at 0.15 m. The state machine accepts Check once per rebuild. Fixed pinch controls use the SDK grab handle and require a fresh press. A short post-release guard prevents accidental activation. Observation uses elapsed active time and pauses when the session is obscured or no wrist pose is available.
+During the reliability pass, disconnecting a hand over the tutorial target reproduced a stale release instruction. The RC cancels the drag, restores the star and explains recovery. Session visibility changes also cancel held input when rendering may be suspended. Returning hands re-arm after the SDK reports an open hand.
 
 ## Verification
 
-- Static checks PASS. node --check game.js, node --check main.js, node --check smoke.mjs and node --check vite.config.js.
-- Unit tests PASS. node --test game.test.js passed six tests covering exact, intermediate and capped errors, swapped identities, rounded session average, duplicate transitions, countdown and replay.
-- Build PASS. npm.cmd run build produced dist/index.html, hashed assets and bundled license notices. Vite reported dependency annotation and chunk-size warnings. Main bundle about 1.69 MB gzip.
-- Simulator PASS. node smoke.mjs opened the production build over local HTTPS in headless Edge with IWER's Quest 3 profile. Desktop fallback, tutorial, each shape moved to its target in round one (100%), two tray-only rounds, all Check/Next actions, final average and replay passed without uncaught page errors. A sustained pinch across the Check/Next change produced one action. After replay the left hand grabbed the tutorial diamond, released it beyond the board, recovered it from the tray and completed the tutorial again. Entry into VR used a browser automation click.
-- Quest hardware and performance UNVERIFIED. No headset available. Public deployment and judge access NOT RUN.
+| Evidence | Result |
+| --- | --- |
+| Automated tests | PASS at 19:38 WAT. node --test game.test.js passed 6/6. Exact, intermediate, tolerance and beyond-tolerance scores, swapped identities, average, invalid/duplicate transitions, active time and replay reset. |
+| Static checks / build | PASS at 19:39 WAT. node --check on main.js, game.js, game.test.js, smoke.mjs and vite.config.js. npm.cmd run build succeeded. Existing bundle-size and third-party annotation warnings. |
+| Editor/browser | PASS in a fresh Edge context against the built site on local HTTPS. Desktop fallback appeared and Enter VR was disabled without immersive support. No editor test applicable. |
+| Simulator | PASS again at 19:40 WAT. node smoke.mjs exercised tutorial, right-hand disconnection over the goal with the other hand tracked, hidden session during a drag, countdown pause/resume after >5 seconds hidden or both hands disconnected, three rounds, a second-hand Check while a star was held, held-button suppression, out-of-bounds return, left-hand recovery, results, replay, session exit and re-entry. Scores 100/0/7 averaged to 36%. No uncaught page errors. Browser entry was automation-clicked; in-session actions used emulated hands. |
+| RC integrity | PASS at 19:41 WAT. All 37 files in release/rc-85a9e24/afterimage-site.zip match the fresh dist/ build byte-for-byte. ZIP and main-bundle SHA-256 values match those recorded above. |
+| Capture review | PASS. Five labeled 960×720 screenshots visually checked against the RC. Tutorial text, three distinct targets, tray/Check, 76% reveal/Next and 76% results/Play again are visible. Capture used deliberate offsets. FFmpeg reported a 63.80-second 960×720 VP9 WebM. |
+| Quest hardware / performance | UNVERIFIED. No headset, physical hand input, headset frame-rate sample or on-device permission-flow evidence. |
+| Public deployment / judge access | NOT RUN. Local HTTPS used a temporary test certificate. Independent public access remains pending. |
+
+## Release candidate audit
+
+Audited November 18, 2026 at approximately 19:42 WAT against the [official requirements](https://start-developer-competition-26.devpost.com/) and [official rules](https://start-developer-competition-26.devpost.com/rules). The official deadline is November 18 at 12:00 PM PST / 21:00 WAT. Blocking results are public delivery, required public materials and completed submission.
+
+| Item | Result | Evidence |
+| --- | --- | --- |
+| Final revision correspondence | PASS | Gameplay source is unchanged from 85a9e24; the fresh build matches all 37 files in the preserved ZIP and its recorded SHA-256. |
+| Intended delivery launch | FAIL | The production artifact launches over local HTTPS in IWER, but no public HTTPS IWSDK URL exists or has been launched independently. |
+| Core loop and replay | PASS | Fresh node tests and the production IWER smoke test completed tutorial, three rounds, results and replay. |
+| Essential hand interactions | UNVERIFIED | Emulated hands completed the in-session flow; physical Quest hands-only entry, reach, interruption handling and performance have no hardware evidence. The gap is disclosed. |
+| Judge access | FAIL | Official IWSDK delivery requires an accessible hosted link. No judge URL or signed-out access check exists. |
+| Required materials | FAIL | Local RC, 63.80-second recorded emulator video, screenshots and draft copy exist. Public YouTube/Vimeo and play URLs, target launch date, completed form and submission confirmation are missing. |
+| Claim accuracy | PASS | Submission copy labels emulator footage and explicitly discloses missing Quest, comfort, permission and performance evidence. No 60 fps claim is made. |
+| Licenses/attribution | PASS | THIRD-PARTY-LICENSES.md and WebXR-input-assets-LICENSE.txt are present in the verified ZIP; THIRD_PARTY.md records the dependencies and CDN hand assets. |
+| Credentials/private data | PASS | Pattern scans found no credentials in the repository content or built artifact and no entrant name/email in dist/. Git author metadata is not shipped in the artifact-only deployment plan. |
+| Deadline/submission evidence | FAIL | The official deadline is confirmed, but there is no Devpost submitted-state, project URL, confirmation or timestamp evidence. |
 
 ## How to run
 
-From the project directory, run npm.cmd ci --ignore-scripts followed by npm.cmd run dev. Open the localhost URL Vite prints. Desktop displays the scene and compatibility message. Use a device with immersive VR and hand tracking for native input.
+From the project root use npm.cmd ci --ignore-scripts for a fresh install, then npm.cmd run dev. For the release version use npm.cmd run preview after building and open its printed loopback URL. The emulator test requires Edge and Git for Windows OpenSSL (or OPENSSL_BIN).
 
 ## How to build/deploy
 
-1. Run npm.cmd run build. Output is dist/. For a manual desktop preview run npm.cmd run preview and open the printed address.
-2. Run node smoke.mjs after building. The test uses installed Microsoft Edge and Git for Windows OpenSSL (or set OPENSSL_BIN to its executable). It starts a private loopback HTTPS server with an ephemeral self-signed certificate, accepts that certificate in the test browser, and shuts both down.
-3. After entrant authorization, upload the contents of dist/ to an HTTPS static host with index.html at the entry path. Verify from a separate device, without account credentials, then test in Quest Browser if available. Public hosting and trusted certificate delivery remain unverified.
+Run node --test game.test.js, npm.cmd run build and node smoke.mjs. Output is dist/. Deploy the verified ZIP contents at the HTTPS site root. Check the ZIP using Get-FileHash release/rc-85a9e24/afterimage-site.zip -Algorithm SHA256. SUBMISSION.md has ordered GitHub Pages, video, signed-out access and Devpost instructions. No running preview server, capture process or unfinished edit.
 
-## Known issues
+## Known issues and reproduction steps
 
-- Hardware comfort, frame rate and cold-start behavior remain the largest verification gaps.
-- Tracking interruption, suspension/resume and real hand visuals need further testing. SDK hand visuals may fetch external assets.
-- The README's original three-hour estimate was historical. The rules name IWSDK (WebXR) for hosted entries, permit alternative hosting, and also refer to a GitHub page in the entry checklist. Verify the final link in Devpost. The reveal section has a truncated duplicate bullet.
-- The official rules specify hands-first Gaming, project-history divisions, a public demo video under three minutes and a project description. Fresh project confirmed; membership and individual eligibility unverified.
+1. **Quest hands-only entry and comfort — UNVERIFIED.** Cold-open the trusted HTTPS URL in Quest Browser with controllers set aside. Pinch Enter VR and grant permissions while seated. Expect a readable tutorial and a stable board, tray and buttons reachable with either hand.
+2. **Physical tracking interruption and headset removal — UNVERIFIED.** Hold the tutorial diamond over its outline and move the holding hand out of view before releasing. Expect the star back in the tray and tutorial still active. Complete the tutorial, remove the headset during Observe for six seconds, then put it back. For a continuing XR session expect the countdown to resume. If the OS ended the session, enter VR again and expect a clean tutorial.
+3. **Hardware replay and frame rate — UNVERIFIED.** Rebuild a round, hold Check through the reveal, release, then pinch Next. Finish three rounds and replay. Expect one score per check, suspended stars and a fresh tutorial. Measure on-device frame rate through observation, dragging and reveal; record model, browser version, RC hash, measurement tool, interval and observed range.
+4. **Hand visuals depend on CDN availability.** The SDK fetched generic-hand/left.glb and right.glb with HTTP 200 in the observed online run. To exercise offline degradation, block cdn.jsdelivr.net before a cold XR launch, clear browser cache and inspect both hand visuals and feedback. Offline results remain unverified.
+5. **Public access — NOT RUN.** Once authorized and published, open both play and video URLs signed out on a separate device. Expect an accessible game, matching entry bundle and playable public video. Record actual URLs and time.
 
 ## Next three actions
 
-1. Exercise tracking interruption and headset/session suspension in the emulator.
-2. If a Quest becomes available, please run the hands-only checklist in SUBMISSION.md and measure headset frame rate. Otherwise capture and label emulator footage.
-3. Reserve the final 45 minutes to deploy with authorization, check independent judge access, capture representative footage and complete entrant submission.
+1. Entrant supplies the public launch date and verifies membership, developer access and eligibility details before using the copy.
+2. With explicit authorization, publish the preserved site and simulator video, verify both URLs signed out and replace the URL placeholders.
+3. Eligible entrant reviews and submits the Devpost entry before 21:00 WAT. Retain organizer confirmation and keep the frozen build accessible through the winner announcement.
 
 ## Decisions and assumptions
 
-Selected IWSDK because Node was available, no native project existed, and the official rules explicitly list IWSDK hosting. Use SDK OneHandGrabbable and Grabbed. The emulator runs only in the test browser. Keep the board at unit scale with meter-based local coordinates.
+Gaming is the proposed track. Entrant explicitly confirmed fresh project provenance and in-window conception. The answer about the upcoming submission did not provide a public launch date. Account entitlements were not independently inspected. The hosted IWSDK route is specifically provided in the official rules; GitHub Pages is the documented release path here. Simulator capture is labeled throughout gameplay; official acceptance and hardware performance are unverified.
+
+Phase interaction policy is explicit in main.js: draggable gameplay meshes are visible only during Tutorial/Rebuild, so they are disabled during Observe and Reveal; the fixed control remains visible during Reveal as Next and during Results as Play again. Do not globally disable all interactions by phase, because that would block phase-appropriate controls.
 
 ## Submission status
 
-- Build/link: local dist/ only. Video: absent. Description: gameplay draft in SUBMISSION.md.
-- Judge access: UNVERIFIED. Submitted: no. Evidence of submission: none.
+- Build/link: verified local ZIP; public play URL pending.
+- Video: release/rc-85a9e24/media/afterimage-iwer-demo.webm; public YouTube/Vimeo link pending.
+- Screenshots: five local, reviewed emulator captures. A separate 1254×1254 generated submission thumbnail is saved at submission-assets/afterimage-thumbnail.png; it is not part of the frozen game ZIP. Description, inspiration, judge instructions, plans, recording outline and checklist: SUBMISSION.md. Target public launch date: entrant placeholder.
+- Judge access: UNVERIFIED. Submitted: no confirmation. Evidence of submission: none. No upload, public publishing, account change or submission performed.
 
 ## Changed files
 
-- index.html and main.js implement browser entry, the spatial board, grab controls and phase presentation. game.js holds authored data, state transitions, timing and scoring. game.test.js checks the game logic.
-- package.json, package-lock.json, vite.config.js and .gitignore define the locked build and output notices.
-- smoke.mjs verifies the full production loop in the emulator.
-- STATUS.md, SUBMISSION.md and THIRD_PARTY.md record evidence, manual checks and dependencies.
-- README.md and AGENTS.md preserved. No partial edits, development server or emulator left running. The Android debugging daemon was started for device discovery.
-
-
+main.js contains input recovery; smoke.mjs covers interruptions, duplicate activation and fixed expected scores. SUBMISSION.md, THIRD_PARTY.md and STATUS.md contain the handoff. public/WebXR-input-assets-LICENSE.txt ships with the generated package notices. release/rc-85a9e24/ preserves the deployable ZIP, media and SHA-256 manifest. submission-assets/afterimage-thumbnail.png is a separate competition thumbnail and does not modify the RC.
